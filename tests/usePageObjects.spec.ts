@@ -6,6 +6,8 @@ import { PageManager } from "../page-objects/pageManager"
 
 import {faker} from "@faker-js/faker"
 
+import { argosScreenshot } from "@argos-ci/playwright";
+
 test.beforeEach(async({page})=>{
     // NOTE:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // The commented out code is basic navigation but below that is when you set the baseURL in the "playwright.config.ts" file
@@ -75,6 +77,16 @@ test.only('testing with argos ci', async ({page})=>{
     const pm = new PageManager(page)
     
     await pm.navigateTo().formLayoutsPage()
+    await argosScreenshot(page, 'form layout page')
     await pm.navigateTo().datepickerPage()
-   
+    await argosScreenshot(page, 'date picker page')
+
+    /* Use the below site/service to setup Screenshot testing in the CI (screenshots are sent here)
+     There is a free version
+     https://app.argos-ci.com/
+     Use the below URL to see data on setting it up with your project:
+     https://argos-ci.com/docs/quickstart/playwright   
+    
+    
+     */
 })

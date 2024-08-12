@@ -22,7 +22,7 @@ import type { TestOptions } from './test-options';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig<TestOptions>({
-  timeout: 160000,
+  timeout: 60000,
   // globalTimeout: 100000,
 
   // expect:{
@@ -45,6 +45,22 @@ export default defineConfig<TestOptions>({
   // Also you can use more than one reporter as seen below
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   reporter: [
+    // NOTE:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    // The line below "process.env.CI ? ["dot"] : ["list"]" is to setup Argos reporter in the project to handle screenshots in the CI 
+    // Also you can use more than one reporter as seen below
+    // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    process.env.CI ? ["dot"] : ["list"],
+    // Add Argos reporter.
+    [
+      "@argos-ci/playwright/reporter",
+      {
+        // Upload to Argos on CI only.
+        uploadToArgos: !!process.env.CI,
+
+        // Set your Argos token (required if not using GitHub Actions).
+        // token: "<YOUR-ARGOS-TOKEN>",
+      },
+    ],
     ['json',{outputFile: 'test-results/jsonReport.json'}],
     ['junit',{outputFile: 'test-results/junitReport.xml'}],
     ['html']
@@ -65,6 +81,7 @@ export default defineConfig<TestOptions>({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    screenshot:'only-on-failure',
 
     // actionTimeout: 5000,
     // navigationTimeout: 5000,
