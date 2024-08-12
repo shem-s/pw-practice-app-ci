@@ -1,0 +1,1 @@
+npm i @faker-js/faker --save-dev --force

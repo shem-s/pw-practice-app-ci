@@ -1,0 +1,15 @@
+Build image:
+docker build -t pw-pageobject-test .
+
+Run image:
+docker run -it pw-pageobject-test
+
+then from the CLI run the test like normal:
+e.g. npm run pageObjects-chrome
+OR
+npx playwright test
+
+
+
+If you setup the docker-compose.yaml file then you run the below command:
+docker-compose up --build

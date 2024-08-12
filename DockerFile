@@ -1,0 +1,11 @@
+FROM mcr.microsoft.com/playwright:v1.45.2-jammy
+
+RUN mkdir /app
+WORKDIR /app
+COPY . /app
+
+RUN npm install --force
+RUN npx playwright install
+
+#The artifacts (result files) are inside the container when the test have been executed
+#Use a docker-compose.yaml file to configure this
