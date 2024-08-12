@@ -20,7 +20,7 @@ test.beforeEach(async({page})=>{
     // and in this case it will be "--grep=@smoke"
     // to run test with different tag names use the following  '--grep --% "@tag1^|@tag2'
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    test('navigate to the form page @smoke', async ({page})=>{
+test('navigate to the form page @smoke', async ({page})=>{
     const pm = new PageManager(page)
     // const navigationTo = new NavigationPage(page)
 
@@ -69,4 +69,12 @@ test('datepicker', async ({page})=>{
     await pm.navigateTo().datepickerPage() 
     await pm.onDatepickerPage().selectCommonDatePickerDateFromToday(5)
     await pm.onDatepickerPage().selectDatepickerWithRangeFromToday(5,7)
+})
+
+test.only('testing with argos ci', async ({page})=>{
+    const pm = new PageManager(page)
+    
+    await pm.navigateTo().formLayoutsPage()
+    await pm.navigateTo().datepickerPage()
+   
 })
