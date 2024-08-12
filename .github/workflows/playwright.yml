@@ -20,7 +20,7 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
     #change the below to whatver command you want to, so as to run the test 
-      run: npm run pageObjects-crome
+      run: npm run pageObjects-chrome
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
